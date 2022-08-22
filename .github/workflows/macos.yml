@@ -1,0 +1,27 @@
+name: macos
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: cmake build
+      run: |
+        mkdir build
+        cd  build
+        cmake ../ -G Xcode
+        cmake --build . --target ALL_BUILD --config Release
+        cmake --build . --target ALL_BUILD --config Debug
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: bin/

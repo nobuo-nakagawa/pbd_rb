@@ -1,0 +1,36 @@
+name: ubuntu
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: install dependencies
+      run: |
+       sudo apt-get update
+       sudo apt-get install freeglut3-dev
+
+    - name: cmake build
+      run: |
+        mkdir build
+        cd  build
+        cmake ../ -DCMAKE_BUILD_TYPE=Release
+        cmake --build .
+
+#    - name: make
+#      run: make
+#      working-directory: ./project/unix
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: bin/

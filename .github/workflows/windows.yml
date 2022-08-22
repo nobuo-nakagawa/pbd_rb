@@ -1,0 +1,35 @@
+name: windows
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: download freeglut
+      run: curl -s -O https://www.transmissionzero.co.uk/files/software/development/GLUT/freeglut-MSVC-3.0.0-2.mp.zip
+
+    - name: setup freeglut
+      run: |
+        7z.exe x -y freeglut-MSVC-3.0.0-2.mp.zip
+
+    - name: cmake build
+      run: |
+        mkdir build
+        cd  build
+        cmake ../ -G "Visual Studio 17" -A x64
+        cmake --build . --target ALL_BUILD --config Release
+        cmake --build . --target ALL_BUILD --config Debug
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: bin/
