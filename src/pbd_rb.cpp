@@ -41,7 +41,7 @@
 
 #define USE_TEST_SCENE (0)
 #define USE_DEBUG      (1)
-#define USE_DOUBLE     (1)
+#define USE_DOUBLE     (0)
 #define USE_CAPTURE    (0)
 #define USE_TW_SCENE   (1)
 #define USE_OBB_COL    (0)

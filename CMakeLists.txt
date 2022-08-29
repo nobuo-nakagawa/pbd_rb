@@ -59,4 +59,4 @@ endif()
 
 include_directories( ${PROJECT_SOURCE_DIR}/src/imgui )
 
-target_link_libraries(pbd_rb ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+target_link_libraries(pbd_rb ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
